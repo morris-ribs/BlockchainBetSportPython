@@ -10,5 +10,6 @@ This is the Python version of the blockchain used to register sport bets.
 
 # Start
 
-To start it, type `python app.py <port_to_listen>`
+To start it, type `python app.py <port_to_listen>` in a terminal.
+
 For example, if you want your API to listen on port 9000, run `python app.py 9000`
