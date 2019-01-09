@@ -90,5 +90,29 @@ def register_nodes_bulk():
 
     return "Bulk registration successful."
 
+@app.route('/consensus')
+def consensus():
+    network_nodes = b.obj["network_nodes"]
+    largest_chain = b.obj["chain"]
+    chain_changed = False
+    pending_bets = []
+    # get longest chain
+    for i in range(len(network_nodes)):
+        network_node = network_nodes[i]
+        resp = requests.get(network_node+"/blockchain")
+        blockchain = resp.json()
+        if len(largest_chain) < len(blockchain["chain"]):
+            chain_changed = True
+            largest_chain = blockchain["chain"]
+            pending_bets = blockchain["pending_bets"]
+    
+    if not chain_changed or len(largest_chain) == 0 or not b.chain_is_valid(largest_chain):
+        return "Current chain has not been replaced."
+
+    b.obj["chain"] = largest_chain
+    b.obj["pending_bets"] = pending_bets
+    return "This chain has been replaced."
+
+
 if __name__ == '__main__':   
     app.run(port=app_port)

@@ -92,6 +92,28 @@ class Blockchain():
             network_nodes.append(new_node)
         return network_nodes
 
+    def chain_is_valid(self, possible_chain):
+        for i in range(1, len(possible_chain)):
+            current_block = possible_chain[i]
+            prev_block = possible_chain[i-1]
+            block_data = {"bets": current_block["bets"], "index": prev_block["index"] - 1}
+            block_hash = self.hash_block(prev_block["hash"], block_data, current_block["nonce"])            
+            if block_hash[:4] != "0000":
+                return False
+
+            if current_block["previous_block_hash"] != prev_block["hash"]:
+                return False
+        
+        genesis_block = possible_chain[0]
+        correct_nonce = genesis_block["nonce"] == 100
+        correct_previous_hash = genesis_block["previous_block_hash"] == "0"
+        correct_hash = genesis_block["hash"] == "0"
+        correct_bets = len(genesis_block["bets"]) == 0
+
+        if not correct_nonce or not correct_previous_hash or not correct_hash or not correct_bets:
+            return False
+
+        return True
 
 
     
