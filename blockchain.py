@@ -115,5 +115,16 @@ class Blockchain():
 
         return True
 
+    def get_bets(self, filter, value_to_search):
+        bets_to_return = []
+        chain = self.obj["chain"]
+        for i in range(len(chain)):
+            block = chain[i]
+            bets = block["bets"]
+            for j in range(len(bets)):
+                bet = bets[j]
+                if bet[filter].lower() == value_to_search.lower():
+                    bets_to_return.append(bet)
 
+        return bets_to_return
     

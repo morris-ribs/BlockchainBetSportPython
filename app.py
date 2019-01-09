@@ -113,6 +113,17 @@ def consensus():
     b.obj["pending_bets"] = pending_bets
     return "This chain has been replaced."
 
+@app.route('/match/<match_id>')
+def get_gets_for_match(match_id):
+    bets = json.dumps(b.get_bets("match_id", match_id))
+    return Response(bets, status=200, content_type="application/json")
+
+
+@app.route('/player/<player_name>')
+def get_gets_for_player(player_name):
+    bets = json.dumps(b.get_bets("player", player_name))
+    return Response(bets, status=200, content_type="application/json")
+
 
 if __name__ == '__main__':   
     app.run(port=app_port)
