@@ -6,7 +6,7 @@ from flask_cors import CORS
 from blockchain import Blockchain
 
 app = Flask(__name__)
-CORS(app)
+CORS(app)   
 
 app_port = sys.argv[1]
 current_node_url = "http://localhost:"+app_port
