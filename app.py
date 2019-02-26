@@ -19,13 +19,13 @@ def get_blockchain():
 @app.route('/bet', methods=['POST'])
 def register_bet():
     payload = request.get_json(force=True)
-    b.register_bet(payload["playername"], payload["matchid"], payload["teamonescore"], payload["teamtwoscore"])
+    b.register_bet(payload["playername"].lower(), payload["matchid"], payload["teamonescore"], payload["teamtwoscore"])
     return "Bet created and broadcast successfully."
 
 @app.route('/bet/broadcast', methods=['POST'])
 def register_and_broadcast_bet():
     payload = request.get_json(force=True)
-    b.register_bet(payload["playername"], payload["matchid"], payload["teamonescore"], payload["teamtwoscore"])    
+    b.register_bet(payload["playername"].lower(), payload["matchid"], payload["teamonescore"], payload["teamtwoscore"])    
     network_nodes = b.obj["network_nodes"]
     # send new node to all other nodes
     for i in range(len(network_nodes)):
@@ -123,7 +123,7 @@ def get_gets_for_match(match_id):
 
 @app.route('/player/<player_name>')
 def get_gets_for_player(player_name):
-    bets = json.dumps(b.get_bets("player", player_name))
+    bets = json.dumps(b.get_bets("player", player_name.lower()))
     return Response(bets, status=200, content_type="application/json")
 
 
