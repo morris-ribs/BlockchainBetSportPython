@@ -42,8 +42,8 @@ class Blockchain():
         bet = {
             "player": player_name,
             "match_id": match_id,
-            "team_one_score": team_one_score, 
-            "team_two_score": team_two_score
+            "teamonescore": team_one_score, 
+            "teamtwoscore": team_two_score
         }
         self.obj["pending_bets"].append(bet)
         return self.get_last_block()
