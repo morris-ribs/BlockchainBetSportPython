@@ -5,6 +5,7 @@ This is the Python version of the blockchain used to register sport bets.
 # Pre-reqs
 
 - Install <a href="http://flask.pocoo.org/docs/1.0/installation/#installation" target="_blank">Flask</a>
+- Install <a href="https://pip.pypa.io/en/stable/installing/" target="_blank">pip</a>
 - Install <a href="https://pypi.org/project/pipenv/" target="_blank">pipenv</a>
 - Install <a href="http://docs.python-requests.org/en/master/user/install/" target="_blank">requests</a>
 - Install <a href="https://flask-cors.readthedocs.io/en/latest/" target="_blank">CORS</a>
